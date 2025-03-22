@@ -480,7 +480,7 @@ footer {
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  transition-delay: .5s;
+  transition: .2s;
 }
 
 .fIcon:hover {
@@ -493,6 +493,63 @@ footer {
   font-weight: 300;
   font-size: 14px;
 }
+
+/* Effet sur le bouton BUY NOW */
+.buyButton {    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);    position: relative;    overflow: hidden;}
+.buyButton::before {    content: '';    position: absolute;    top: 0;    left: -100%;    width: 100%;    height: 100%;    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);    transition: 0.5s;}
+.buyButton:hover::before {    left: 100%;}.buyButton:active {    transform: scale(0.95);}
+/* Animation Limited Offer */
+.limitedOffer {    animation: pulse 2s infinite;    position: relative;}
+@keyframes pulse {    0% { transform: scale(1); }    50% { transform: scale(1.05); }    100% { transform: scale(1); }}
+/* Animation des Features */
+.feature {    transition: transform 0.3s ease, box-shadow 0.3s ease;}
+.feature:hover {    transform: translateY(-5px);    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);}
+/* Animation bouton Newsletter */
+.fButton {    transition: all 0.3s ease;    position: relative;    overflow: hidden;    z-index: 1;}
+.fButton::after {    content: '';    position: absolute;    bottom: 0;    left: 0;    width: 100%;    height: 100%;    background-color: #0a75ee;    z-index: -2;    transform: scaleX(0);    transform-origin: right;    transition: transform 0.3s ease;}
+.fButton:hover::after {    transform: scaleX(1);    transform-origin: left;}
+/* Animation tailles de chaussures */
+.size {    transition: all 0.3s ease;}
+.size.selected {    background-color: black;    color: white;    transform: scale(1.1);}
+/* Animation couleurs de chaussures */
+.color {    transition: transform 0.3s ease;    position: relative;}
+.color.selected::after {    content: '✓';    position: absolute;    top: 50%;    left: 50%;    transform: translate(-50%, -50%);    color: white;    font-size: 14px;}
+.color:hover {    transform: scale(1.2);}
+/* Animation bouton paiement */
+.payButton {    transition: all 0.3s ease;    background: linear-gradient(45deg, #045a88, #0383a9);    background-size: 200% 200%;    animation: gradientShift 3s ease infinite;}
+@keyframes gradientShift {    0% { background-position: 0% 50%; }    50% { background-position: 100% 50%; }    100% { background-position: 0% 50%; }}
+/* Animation inputs paiement */
+.payInput {    transition: border-color 0.3s ease;}
+.payInput:focus {    border-bottom: 2px solid #0a75ee;}
+/* Animation galerie */
+.galleryItem {    transition: transform 0.5s ease;    overflow: hidden;}
+.galleryItem:hover img {    transform: scale(1.05);}
+.galleryItem img {    transition: transform 0.5s ease;}
+/* Animation slider */
+.sliderWrapper {    transition: transform 0.5s ease;}
+.sliderItem {    opacity: 0.7;    transition: opacity 0.5s ease;}
+.sliderItem.active {    opacity: 1;}
+/* Animation menu navigation */
+.menuItem {    position: relative;    overflow: hidden;}
+.menuItem::after {    content: '';    position: absolute;    bottom: 0;    left: 0;    width: 0%;    height: 2px;    background-color: #0a75ee;    transition: width 0.3s ease;}
+.menuItem:hover::after {    width: 100%;}
+/* Animation footer icons */
+.fIcon {    transition: transform 0.3s ease, background-color 0.3s ease;}
+.fIcon:hover {    transform: scale(1.2) rotate(5deg);}
+/* Animation search bar */
+.search {    transition: box-shadow 0.3s ease;}
+.search:focus-within {    box-shadow: 0 0 10px rgba(10, 117, 238, 0.2);}
+.searchInput {    transition: width 0.3s ease;}
+.search:focus-within .searchInput {    width: 120%;}
+/* Animation produit price tag */
+.sliderPrice {    transition: transform 0.3s ease;}
+.sliderPrice:hover {    transform: scale(1.1) rotate(-5deg);    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);}
+/* Animation produit description */
+.productDesc {    position: relative;    overflow: hidden;}
+.productDesc::after {    content: '';    position: absolute;    bottom: -2px;    left: 0;    width: 100%;    height: 2px;    background: linear-gradient(to right, #0a75ee, transparent);    transform: scaleX(0);    transition: transform 0.3s ease;}
+.productDesc:hover::after {    transform: scaleX(1);}
+
+
 
 @media screen and (max-width:480px) {
   nav{
@@ -605,5 +662,18 @@ footer {
   .payment{
     width: 90%;
     padding: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  nav {
+    padding: 0;
+  }
+ .navItem {
+   display: none;
+ }
+  .navBottom h3 {
+    padding: 0;
+    font-size: .5em;
   }
 }

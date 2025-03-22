@@ -5,7 +5,7 @@ const products = [
   {
     id: 1,
     title: "Air Force",
-    price: 119,
+    price: 15000,
     colors: [
       {
         code: "black",
@@ -20,7 +20,7 @@ const products = [
   {
     id: 2,
     title: "Air Jordan",
-    price: 149,
+    price: 15000,
     colors: [
       {
         code: "lightgray",
@@ -35,7 +35,7 @@ const products = [
   {
     id: 3,
     title: "Blazer",
-    price: 109,
+    price:15000,
     colors: [
       {
         code: "lightgray",
@@ -50,7 +50,7 @@ const products = [
   {
     id: 4,
     title: "Crater",
-    price: 129,
+    price: 15000,
     colors: [
       {
         code: "black",
@@ -65,7 +65,7 @@ const products = [
   {
     id: 5,
     title: "Hippie",
-    price: 99,
+    price: 15000,
     colors: [
       {
         code: "gray",
@@ -134,4 +134,117 @@ productButton.addEventListener("click", () => {
 
 close.addEventListener("click", () => {
   payment.style.display = "none";
+});
+
+
+// Attendre que le DOM soit chargé
+document.addEventListener('DOMContentLoaded', function() {
+  // Gestion des tailles de chaussures
+  const sizes = document.querySelectorAll('.size');
+  sizes.forEach(size => {
+    size.addEventListener('click', function() {
+      // Enlever la sélection précédente
+      sizes.forEach(s => s.classList.remove('selected'));
+      // Ajouter la nouvelle sélection
+      this.classList.add('selected');
+    });
+  });
+
+  // Gestion des couleurs
+  const colors = document.querySelectorAll('.color');
+  colors.forEach(color => {
+    color.addEventListener('click', function() {
+      colors.forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+
+  // Animation du bouton BUY NOW au scroll
+  const buyButtons = document.querySelectorAll('.buyButton');
+  let lastScrollTop = 0;
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset;
+
+    buyButtons.forEach(button => {
+      if (isElementInViewport(button)) {
+        if (scrollTop > lastScrollTop) {
+          button.style.transform = 'translateX(10px)';
+        } else {
+          button.style.transform = 'translateX(0)';
+        }
+      }
+    });
+
+    lastScrollTop = scrollTop;
+  });
+
+  // Animation des features au scroll
+  const features = document.querySelectorAll('.feature');
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px'
+  };
+
+  const featureObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  features.forEach(feature => {
+    feature.style.opacity = '0';
+    feature.style.transform = 'translateY(20px)';
+    feature.style.transition = 'all 0.6s ease-out';
+    featureObserver.observe(feature);
+  });
+
+  // Animation du formulaire de paiement
+  const payInputs = document.querySelectorAll('.payInput');
+  payInputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      this.style.transform = 'translateX(5px)';
+    });
+
+    input.addEventListener('blur', function() {
+      this.style.transform = 'translateX(0)';
+    });
+  });
+
+  // Animation de la navbar au scroll
+  let prevScrollpos = window.pageYOffset;
+  const navbar = document.querySelector('nav');
+
+  window.addEventListener('scroll', function() {
+    const currentScrollPos = window.pageYOffset;
+
+    if (prevScrollpos > currentScrollPos) {
+      navbar.style.top = "0";
+    } else {
+      navbar.style.top = "-50px";
+    }
+
+    if (currentScrollPos > 100) {
+      navbar.style.background = 'rgba(217, 214, 214, 0.95)';
+    } else {
+      navbar.style.background = '#d9d6d6';
+    }
+
+    prevScrollpos = currentScrollPos;
+  });
+
+  // Fonction utilitaire pour vérifier si un élément est visible
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
 });
